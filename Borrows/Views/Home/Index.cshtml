@@ -1,8 +1,94 @@
-﻿@{
+﻿@model Borrows.Controllers.HomeController
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <!-- /.box-header -->
+                    <h2>
+                        Borrow System (KYOCERA Document Solutions Thailand)
+                    </h2>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Borrow</h3>
+
+                    
+                    <a href="#" title="เพิ่มใบยืม" style="text-anchor:end;text-align:end">
+                        <i class="fa fa-plus-square"></i>
+                    </a>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="200">@Html.DisplayNameFor(model => model.borrowdb.First().BorrowId)</th>
+                            <th width="200">@Html.DisplayNameFor(model => model.borrowdb.First().CustomerName)</th>
+                            <th width="200">@Html.DisplayNameFor(model => model.borrowdb.First().ServiceCode)</th>
+                            <th width="200">@Html.DisplayNameFor(model => model.borrowdb.First().RequestName)</th>
+                            <th width="200">@Html.DisplayNameFor(model => model.borrowdb.First().RequestDate)</th>
+                            <th width="200">Status</th>
+                            <th width="200">Action</th>
+                        </tr>
+                        @foreach (var item in Model.borrowdb)
+                        {
+                        <tr>
+                            <td>
+                                <a target="_blank">
+                                    @item.BorrowId
+                                </a>
+                            </td>
+                            <td>
+                                <a target="_blank">
+                                    @item.CustomerName
+                                </a>
+                            </td>
+                            <td>
+                                <a target="_blank">
+                                    @item.ServiceCode
+                                </a>
+                            </td>
+                            <td>
+                                <a target="_blank">
+                                    @item.RequestName
+                                </a>
+                            </td>
+                            <td>
+                                <a target="_blank">
+                                    @item.RequestDate
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@item.BorrowItem" target="_blank">
+                                    @item.BorrowStatus
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@item.BorrowItem" target="_blank" title="แก้ไข">
+                                    <i class="fa fa-edit"></i>  
+                                </a>
+                                <a href="@item.BorrowItem" target="_blank" title="ลบ">
+                                    <i class="fa fa-trash-alt"></i>  
+                                </a>
+                                <a href="@item.BorrowItem" target="_blank" title="คืน">
+                                    <i class="fa fa-exchange-alt"></i>  
+                                </a>
+                            </td>
+                        </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /.content -->

@@ -53,12 +53,21 @@ namespace Borrows
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller=Home}/{action=Index}/{id?}");
+            //});
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=BorrowDbs}/{action=Index}");
             });
+
+            //app.UseMvc();
         }
     }
 }

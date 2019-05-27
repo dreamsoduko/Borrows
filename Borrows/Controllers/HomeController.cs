@@ -10,9 +10,24 @@ namespace Borrows.Controllers
 {
     public class HomeController : Controller
     {
+        public KDTH_BorrowContext _context = new KDTH_BorrowContext();
+        public kyocera_dbContext menu_context = new kyocera_dbContext();
+
+        public IEnumerable<BorrowDb> borrowdb;
+        public IEnumerable<MenuL1> menul1;
+        public IEnumerable<MenuL2> menul2;
+        public IEnumerable<MenuL3> menul3;
+        public IEnumerable<MenuL4> menul4;
+
+
         public IActionResult Index()
         {
-            return View();
+            borrowdb = _context.BorrowDb.ToList();
+            menul1 = menu_context.MenuL1.ToList();
+            menul2 = menu_context.MenuL2.ToList();
+            menul3 = menu_context.MenuL3.ToList();
+            menul4 = menu_context.MenuL4.ToList();
+            return View(this);
         }
 
         public IActionResult Privacy()

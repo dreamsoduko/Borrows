@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Borrows.Models.BorrowDb>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<h2>Borrow System</h2>
+
+<p>
+    <a asp-action="Create"><i class="fa fa-Add"></i> เพิ่ม</a>
+</p>
+<div class="col-md-12">
+    <div class="box">
+        <div class="box-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ServiceCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CustomerName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProductId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SerialNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EntryName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EntryDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RequestName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RequestDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BorrowStatus)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ServiceCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SerialNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RequestName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RequestDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BorrowStatus)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.BorrowId"><i class="fa fa-edit"></i>  แก้ไข</a> |
+                                <a asp-action="Details" asp-route-id="@item.BorrowId"><i class="fa fa-info"></i> ดูรายละเอียด</a> |
+                                <a asp-action="Delete" asp-route-id="@item.BorrowId"><i class="fa fa-trash"></i> ลบ</a>|
+                                <a asp-action="Exchange" asp-route-id="@item.BorrowId"><i class="fa fa-exchange"></i> คืน</a> |
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+        

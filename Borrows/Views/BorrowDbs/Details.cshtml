@@ -1,0 +1,108 @@
+﻿@model Borrows.Models.BorrowDb
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2 style="margin-left:20px">Details</h2>
+
+<div style="margin-left:20px">
+    <h4>BorrowDb</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ServiceCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SerialNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EntryName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EntryName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EntryDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EntryDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RequestName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RequestDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BorrowStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BorrowStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeadApproverId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeadApproverId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeadApproverDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeadApproverDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ManagerApproverId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ManagerApproverId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ManagerApproverDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ManagerApproverDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LogisticApproverId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LogisticApproverId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LogisticApproverDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LogisticApproverDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BorrowId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
