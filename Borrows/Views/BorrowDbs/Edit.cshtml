@@ -1,7 +1,11 @@
 ﻿@model Borrows.Models.BorrowDb
+@using NonFactors.Mvc.Grid;
+
 
 @{
     ViewData["Title"] = "Edit";
+    //WebGrid grid = new WebGrid(Model.BorrowItem, canPage: true, rowsPerPage: 5);
+
 }
 
 <h2 style="margin-left:20px">Edit</h2>
@@ -9,7 +13,7 @@
 <h4 style="margin-left:20px">BorrowDb</h4>
 <hr />
 <div class="row" style="margin-left:20px">
-    <div class="col-md-4">
+    <div class="col-md-10">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BorrowId" name="Id" />
@@ -89,23 +93,17 @@
                 <span asp-validation-for="LogisticApproverDate" class="text-danger"></span>
             </div>
 
-            @(
-                Grid(Model.BorrowItem)
-                .Build(columns =>
+            <div id="editorRows">
+                @foreach (var item in Model.BorrowItem)
                 {
-                    columns.Add(model => model.Item).Titled("Name");
-                    columns.Add(model => model.Surname).Titled("Surname");
-                    columns.Add(model => model.MaritalStatus).Titled("Marital status");
+                    Html.RenderPartial("_itemEditor", item);
+                }
 
-                    columns.Add(model => model.Age).Titled("Age");
-                    columns.Add(model => model.Birthday).Titled("Birthday").Formatted("{0:d}");
-                    columns.Add(model => model.IsWorking).Titled("Employed");
-                })
-                .Empty("No data found")
-                .Filterable()
-                .Sortable()
-                .Pageable()
-            )
+            </div>
+            <input type="button" id="addItem" name="addItem" />
+
+
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
@@ -114,9 +112,24 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to dashboard</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+
+        $("#addItem").on('click', function () {
+
+            $.ajax({
+                async: false,
+                url: '/BorrowDbs/AddItem'
+            }).success(function (partialView) {
+
+                $('#editorRows').append(partialView);
+
+            });
+        });
+
+    </script>
 }

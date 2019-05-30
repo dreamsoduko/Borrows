@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc.Core;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Borrows.Models;
-using System.Web;
-using GridMvc;
+using System.Text;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Session;
 
 namespace Borrows.Controllers
 {
@@ -16,19 +17,30 @@ namespace Borrows.Controllers
     {
         private readonly KDTH_BorrowContext _context = new KDTH_BorrowContext();
         private Astea_TH_1401Context astea_context = new Astea_TH_1401Context();
-
-        
+        private kyocera_dbContext kyocera_context = new kyocera_dbContext();
+    
         public BorrowDb borrowdb = new BorrowDb();
 
         public BorrowDbsController()
         {
+            
             //var students = astea_context.serviceDetail.FromSql("dbo.sp_GetServiceDetails 'SV1905033242'").ToList();
+           
         }
 
         // GET: BorrowDbs
         public async Task<IActionResult> Index()
         {
-           
+            HttpContext.Session.SetString("user", "00164");
+            HttpContext.Session.SetInt32("role", 1);
+            
+            if (!HttpContext.Session.IsAvailable)
+            {
+                //HttpContext.Session.Set("User",Encoding.UTF8.GetBytes("Test"));
+                var test = HttpContext.Session.GetString("user");
+                Response.Redirect("Index");
+            }
+
             return View(await _context.BorrowDb.ToListAsync());
         }
 
@@ -53,40 +65,68 @@ namespace Borrows.Controllers
         // GET: BorrowDbs/Create
         public IActionResult Create()
         {
+            var user = kyocera_context.Nmhmemp.Where(a => a.EmpCode == HttpContext.Session.GetString("user")).FirstOrDefault();
+            ViewBag.GroupList = kyocera_context.Nmhmemp.Where(a => a.OrgUnitCode == user.OrgUnitCode).ToList();
+
+            ViewBag.User = "["+user.EmpCode+"]"+user.FirstName+" "+user.LastName;
+
             return View();
         }
 
-        //// GET: BorrowDbs/Create/SV
-        //public IActionResult Create(string servicecode)
-        //{
-        //    var students = astea_context.serviceDetail.FromSql("dbo.sp_GetServiceDetails '{servicecode}'").ToList();
-        //    return View();
-        //}
+        public ActionResult AddItem()
+        {
+            var newItem = new BorrowItem();
 
-        // POST: BorrowDbs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+            return PartialView("~/Views/Shared/_itemEditor.cshtml", newItem);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ServiceCode,CustomerName,ProductId,SerialNo,EntryName,EntryDate,RequestName,RequestDate,BorrowStatus,HeadApproverId,HeadApproverDate,ManagerApproverId,ManagerApproverDate,LogisticApproverId,LogisticApproverDate,BorrowItems")] BorrowDb borrowDb,string SV)
+        public async Task<IActionResult> Create(string SV,string CustName,string ProdId,string SerialNo,string Entryname, [Bind("ServiceCode,CustomerName,ProductId,SerialNo,EntryName,EntryDate,RequestName,RequestDate,BorrowStatus,HeadApproverId,HeadApproverDate,ManagerApproverId,ManagerApproverDate,LogisticApproverId,LogisticApproverDate,BorrowItem")] BorrowDb borrowDb)
         {
-            if (astea_context.serviceDetail.FromSql("dbo.sp_GetServiceDetails '" + SV + "'").ToList().Count > 0)
-            {
-                ServiceDetails students = astea_context.serviceDetail.FromSql("dbo.sp_GetServiceDetails " + SV).FirstOrDefault();
-                ViewBag.SV = students.RequestID;
-                ViewBag.Customer = students.CustomerName;
-                ViewBag.Product = students.ItemName;
-                ViewBag.Serial = students.SerialNO;
-                return View(borrowDb);
-            }
+           
 
-            if (ModelState.IsValid)
+            var user = kyocera_context.Nmhmemp.Where(a => a.EmpCode == HttpContext.Session.GetString("user")).FirstOrDefault();
+            ViewBag.GroupList = kyocera_context.Nmhmemp.Where(a => a.OrgUnitCode == user.OrgUnitCode).ToList();
+
+            ViewBag.User = "[" + user.EmpCode + "]" + user.FirstName + " " + user.LastName;
+
+            if (borrowDb.RequestDate == null)
             {
-                _context.BorrowDb.Add(borrowDb);
-                _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.borrow_db ON");
-                await _context.SaveChangesAsync();
-                _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.borrow_db OFF");
-                return RedirectToAction(nameof(Index));
+                if (astea_context.serviceDetail.FromSql("dbo.sp_GetServiceDetails '" + SV + "'").ToList().Count > 0)
+                {
+                    ServiceDetails students = astea_context.serviceDetail.FromSql("dbo.sp_GetServiceDetails " + SV).FirstOrDefault();
+                    ViewBag.SV = students.RequestID;
+                    ViewBag.Customer = students.CustomerName;
+                    ViewBag.Product = students.ItemName;
+                    ViewBag.Serial = students.SerialNO;
+                    return View(borrowDb);
+                }
+            }
+            else
+            {
+                // Import data to DB
+                //BorrowDb borrowDb = new BorrowDb();
+                borrowDb.ServiceCode = SV;
+                borrowDb.CustomerName = CustName;
+                borrowDb.ProductId = ProdId;
+                borrowDb.SerialNo = SerialNo;
+                borrowDb.EntryName = Entryname;
+                borrowDb.HeadApproverDate = DateTime.Now;
+                borrowDb.HeadApproverId = 0;
+                borrowDb.LogisticApproverDate = DateTime.Now;
+                borrowDb.LogisticApproverId = 0;
+                borrowDb.ManagerApproverDate = DateTime.Now;
+                borrowDb.ManagerApproverId = 0;
+
+                if (ModelState.IsValid)
+                {
+                    _context.BorrowDb.Add(borrowDb);
+                    _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.borrow_db ON");
+                    await _context.SaveChangesAsync();
+                    _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.borrow_db OFF");
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(borrowDb);
         }
@@ -113,7 +153,7 @@ namespace Borrows.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BorrowId,ServiceCode,CustomerName,ProductId,SerialNo,EntryName,EntryDate,RequestName,RequestDate,BorrowStatus,HeadApproverId,HeadApproverDate,ManagerApproverId,ManagerApproverDate,LogisticApproverId,LogisticApproverDate")] BorrowDb borrowDb)
+        public async Task<IActionResult> Edit(int id, [Bind("BorrowId,ServiceCode,CustomerName,ProductId,SerialNo,EntryName,EntryDate,RequestName,RequestDate,BorrowStatus,HeadApproverId,HeadApproverDate,ManagerApproverId,ManagerApproverDate,LogisticApproverId,LogisticApproverDate,BorrowItem")] BorrowDb borrowDb)
         {
             //if (id != borrowDb.BorrowId)
             //{
@@ -126,7 +166,8 @@ namespace Borrows.Controllers
             {
                 try
                 {
-                    _context.Update(borrowDb);
+                    _context.BorrowDb.Update(borrowDb);
+                    //_context.BorrowItem.UpdateRange(borrowDb.BorrowItem);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -169,7 +210,9 @@ namespace Borrows.Controllers
         public async Task<IActionResult> DeleteConfirmed(int? id)
         {
             var borrowDb = await _context.BorrowDb.FindAsync(id);
+            var items = await _context.BorrowItem.Where(a => a.BorrowId == id).ToListAsync();
             _context.BorrowDb.Remove(borrowDb);
+            _context.BorrowItem.RemoveRange(items);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -178,5 +221,7 @@ namespace Borrows.Controllers
         {
             return _context.BorrowDb.Any(e => e.BorrowId == id);
         }
+
+        
     }
 }

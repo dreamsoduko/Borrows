@@ -11,13 +11,18 @@
 
 
   <ItemGroup>
-    <PackageReference Include="AspNet.Mvc.Grid" Version="1.0.1" />
+    <PackageReference Include="BeginCollectionItem" Version="1.2.1" />
+    <PackageReference Include="BeginCollectionItemCore" Version="1.0.8" />
     <PackageReference Include="EntityFramework" Version="6.2.0" />
     <PackageReference Include="Grid.Mvc" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="NonFactors.Grid.Core.Mvc6" Version="4.1.1" />
+    <PackageReference Include="NonFactors.Grid.Mvc6" Version="4.1.1" />
   </ItemGroup>
 
 

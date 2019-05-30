@@ -1,0 +1,37 @@
+﻿@using HtmlHelpers.BeginCollectionItemCore;
+@model Borrows.Models.BorrowItem
+
+@{
+    Layout = null;
+}
+
+<li style="padding-bottom:15px" class="form-group">
+    @using (Html.BeginCollectionItem("BorrowItem"))
+    {
+        @*<img src="@Url.Content("~/Content/images/draggable-icon.png")" style="cursor: move" alt="" />*@
+        <i class="fa-square" style="cursor: move" alt=""></i>
+        <div class="form-control">
+            @Html.HiddenFor(model => model.ItemId)
+
+            @Html.LabelFor(model => model.ItemCode)
+            @Html.EditorFor(model => model.ItemCode)
+            @Html.ValidationMessageFor(model => model.ItemCode)
+
+            @Html.LabelFor(model => model.ItemName)
+            @Html.EditorFor(model => model.ItemName)
+            @Html.ValidationMessageFor(model => model.ItemName)
+
+            @Html.LabelFor(model => model.ItemQty)
+            @Html.EditorFor(model => model.ItemQty)
+            @Html.ValidationMessageFor(model => model.ItemQty)
+
+            @Html.LabelFor(model => model.ItemStatus)
+            @Html.EditorFor(model => model.ItemStatus)
+            @Html.ValidationMessageFor(model => model.ItemStatus)
+            <a href="#" onclick="$(this).parent().remove();"><i class="fa-trash"></i></a>
+        </div>
+
+
+    }
+</li>
+
