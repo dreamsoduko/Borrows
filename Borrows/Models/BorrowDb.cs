@@ -24,11 +24,11 @@ namespace Borrows.Models
         public string RequestName { get; set; }
         public DateTime? RequestDate { get; set; }
         public string BorrowStatus { get; set; }
-        public int? HeadApproverId { get; set; }
+        public string HeadApproverId { get; set; }
         public DateTime? HeadApproverDate { get; set; }
-        public int? ManagerApproverId { get; set; }
+        public string ManagerApproverId { get; set; }
         public DateTime? ManagerApproverDate { get; set; }
-        public int? LogisticApproverId { get; set; }
+        public string LogisticApproverId { get; set; }
         public DateTime? LogisticApproverDate { get; set; }
 
         public virtual ICollection<BorrowItem> BorrowItem { get; set; }

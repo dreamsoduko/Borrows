@@ -1,0 +1,131 @@
+﻿@model Borrows.Controllers.BorrowDbsController
+@using NonFactors.Mvc.Grid;
+
+@{
+    ViewData["Title"] = "Confirm";
+}
+
+<h2 style="margin-left:20px">Confirm</h2>
+
+<div style="margin-left:20px">
+    <h4>BorrowDb</h4>
+    <hr />
+    <form>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.ServiceCode)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.ServiceCode)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.CustomerName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.CustomerName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.ProductId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.ProductId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.SerialNo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.SerialNo)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.EntryName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.EntryName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.EntryDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.EntryDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.RequestName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.RequestName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.RequestDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.RequestDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.BorrowStatus)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.BorrowStatus)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.HeadApproverId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.HeadApproverId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.HeadApproverDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.HeadApproverDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.ManagerApproverId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.ManagerApproverId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.ManagerApproverDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.ManagerApproverDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.LogisticApproverId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.LogisticApproverId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.borrowdb.LogisticApproverDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.borrowdb.LogisticApproverDate)
+            </dd>
+            <br />
+
+            @(Html
+            .Grid(Model.borrowdb.BorrowItem)
+            .Build(columns =>
+            {
+                columns.Add(model => model.ItemCode).Titled("Item Code");
+                columns.Add(model => model.ItemName).Titled("Item Name");
+                columns.Add(model => model.ItemQty).Titled("Qty");
+                columns.Add(model => model.ItemStatus).Titled("Status");
+            })
+            .Empty("ไม่มี Item")
+            .Filterable()
+            .Sortable()
+            .Pageable()
+            )
+
+        </dl>
+        @*<div class="form-group">
+            <input type="submit" value="Create" class="btn btn-success" />
+        </div>*@
+    </form>
+</div>
+<div>
+    <a asp-action="Confirm" asp-route-id="@Model.borrowdb.BorrowId">Confirm</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

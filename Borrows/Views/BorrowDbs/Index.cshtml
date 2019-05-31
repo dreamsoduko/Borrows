@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Borrows.Models.BorrowDb>
-@using NonFactors.Mvc.Grid;
+﻿@*@model IEnumerable<Borrows.Models.BorrowDb>*@
+@model Borrows.Controllers.BorrowDbsController
 
 @{
     ViewData["Title"] = "Index";
@@ -9,8 +9,8 @@
 
 <h2>Borrow System</h2>
 
-<p>
-    <a asp-action="Create"><i class="fa fa-Add"></i> เพิ่ม</a>
+<p class="col-12" style="text-align:right">
+    <a asp-action="Create"><i class="fa fa-add"></i> เพิ่ม</a>
 </p>
 <div class="col-md-12">
     <div class="box">
@@ -19,31 +19,31 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.ServiceCode)
+                            @Html.DisplayNameFor(model => model.borrowdb.ServiceCode)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.CustomerName)
+                            @Html.DisplayNameFor(model => model.borrowdb.CustomerName)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ProductId)
+                            @Html.DisplayNameFor(model => model.borrowdb.ProductId)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.SerialNo)
+                            @Html.DisplayNameFor(model => model.borrowdb.SerialNo)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.RequestName)
+                            @Html.DisplayNameFor(model => model.borrowdb.RequestName)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.RequestDate)
+                            @Html.DisplayNameFor(model => model.borrowdb.RequestDate)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.BorrowStatus)
+                            @Html.DisplayNameFor(model => model.borrowdb.BorrowStatus)
                         </th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model._context.BorrowDb)
                     {
                         <tr>
                             <td>
@@ -68,10 +68,10 @@
                                 @Html.DisplayFor(modelItem => item.BorrowStatus)
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.BorrowId" title="แก้ไข"><i class="fa fa-edit"></i></a> |
-                                <a asp-action="Details" asp-route-id="@item.BorrowId" title="ดุรายละเอียด"><i class="fa fa-info"></i></a> |
+                                <a asp-action="Edit" asp-route-id="@item.BorrowId" title="แก้ไข"><i class="fa fa-edit"></i></a>|
+                                <a asp-action="Details" asp-route-id="@item.BorrowId" title="ดุรายละเอียด"><i class="fa fa-info"></i></a>|
                                 <a asp-action="Delete" asp-route-id="@item.BorrowId" title="ลบ"><i class="fa fa-trash"></i></a>|
-                                <a asp-action="Exchange" asp-route-id="@item.BorrowId" title="คืนของ"><i class="fa fa-exchange"></i></a>
+                                <a asp-action="Confirm" asp-route-id="@item.BorrowId" title="ยืนยัน"><i class="fa fa-exchange"></i></a>
                             </td>
                         </tr>
                     }

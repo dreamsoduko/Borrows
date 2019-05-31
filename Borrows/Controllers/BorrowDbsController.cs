@@ -15,11 +15,12 @@ namespace Borrows.Controllers
 {
     public class BorrowDbsController : Controller
     {
-        private readonly KDTH_BorrowContext _context = new KDTH_BorrowContext();
-        private Astea_TH_1401Context astea_context = new Astea_TH_1401Context();
+        public KDTH_BorrowContext _context = new KDTH_BorrowContext();
+        public Astea_TH_1401Context astea_context = new Astea_TH_1401Context();
         public kyocera_dbContext kyocera_context = new kyocera_dbContext();
     
         public BorrowDb borrowdb = new BorrowDb();
+        public BorrowItem borrowitem = new BorrowItem();
 
 
         public BorrowDbsController()
@@ -41,7 +42,8 @@ namespace Borrows.Controllers
                 Response.Redirect("Index");
             }
 
-            return View(await _context.BorrowDb.ToListAsync());
+            //return View(await _context.BorrowDb.ToListAsync());
+            return View(this);
         }
 
         // GET: BorrowDbs/Details/5
@@ -52,14 +54,73 @@ namespace Borrows.Controllers
                 return NotFound();
             }
 
-            var borrowDb = await _context.BorrowDb
+            borrowdb = await _context.BorrowDb
                 .FirstOrDefaultAsync(m => m.BorrowId == id);
-            if (borrowDb == null)
+            var items = await _context.BorrowItem.Where(a => a.BorrowId == id).ToListAsync();
+            if (borrowdb == null)
             {
                 return NotFound();
             }
 
+            return View(this);
+        }
+
+        public async Task<IActionResult> Confirm(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            borrowdb = await _context.BorrowDb
+                .FirstOrDefaultAsync(m => m.BorrowId == id);
+            var items = await _context.BorrowItem.Where(a => a.BorrowId == id).ToListAsync();
+            if (borrowdb == null)
+            {
+                return NotFound();
+            }
+
+            return View(this);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Confirm(int id,string approver, [Bind("BorrowId,ServiceCode,CustomerName,ProductId,SerialNo,EntryName,EntryDate,RequestName,RequestDate,BorrowStatus,HeadApproverId,HeadApproverDate,ManagerApproverId,ManagerApproverDate,LogisticApproverId,LogisticApproverDate,BorrowItem")] BorrowDb borrowDb)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    borrowdb.BorrowStatus = "Approved";
+                    _context.BorrowDb.Update(borrowDb);
+                    //_context.BorrowItem.UpdateRange(borrowDb.BorrowItem);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!BorrowDbExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
             return View(borrowDb);
+            //var borrow = _context.BorrowDb
+            //    .FirstOrDefaultAsync(m => m.BorrowId == id);
+
+
+
+            return View(this);
         }
 
         // GET: BorrowDbs/Create
@@ -70,7 +131,7 @@ namespace Borrows.Controllers
 
             ViewBag.User = "["+user.EmpCode+"]"+user.FirstName+" "+user.LastName;
 
-            return View();
+            return View(this);
         }
 
         public ActionResult AddItem()
@@ -100,7 +161,7 @@ namespace Borrows.Controllers
                     ViewBag.Customer = students.CustomerName;
                     ViewBag.Product = students.ItemName;
                     ViewBag.Serial = students.SerialNO;
-                    return View(borrowDb);
+                    return View(this);
                 }
             }
             else
@@ -113,11 +174,11 @@ namespace Borrows.Controllers
                 borrowDb.SerialNo = SerialNo;
                 borrowDb.EntryName = Entryname;
                 borrowDb.HeadApproverDate = DateTime.Now;
-                borrowDb.HeadApproverId = 0;
+                borrowDb.HeadApproverId = "";
                 borrowDb.LogisticApproverDate = DateTime.Now;
-                borrowDb.LogisticApproverId = 0;
+                borrowDb.LogisticApproverId = "";
                 borrowDb.ManagerApproverDate = DateTime.Now;
-                borrowDb.ManagerApproverId = 0;
+                borrowDb.ManagerApproverId = "";
 
                 if (ModelState.IsValid)
                 {
@@ -128,7 +189,7 @@ namespace Borrows.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            return View(borrowDb);
+            return View(this);
         }
 
         // GET: BorrowDbs/Edit/5

@@ -1,4 +1,4 @@
-﻿@model Borrows.Models.BorrowDb
+﻿@model Borrows.Controllers.BorrowDbsController
 @using NonFactors.Mvc.Grid;
 
 @{
@@ -12,104 +12,104 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ServiceCode)
+            @Html.DisplayNameFor(model => model.borrowdb.ServiceCode)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ServiceCode)
+            @Html.DisplayFor(model => model.borrowdb.ServiceCode)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerName)
+            @Html.DisplayNameFor(model => model.borrowdb.CustomerName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CustomerName)
+            @Html.DisplayFor(model => model.borrowdb.CustomerName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ProductId)
+            @Html.DisplayNameFor(model => model.borrowdb.ProductId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ProductId)
+            @Html.DisplayFor(model => model.borrowdb.ProductId)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.SerialNo)
+            @Html.DisplayNameFor(model => model.borrowdb.SerialNo)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.SerialNo)
+            @Html.DisplayFor(model => model.borrowdb.SerialNo)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.EntryName)
+            @Html.DisplayNameFor(model => model.borrowdb.EntryName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.EntryName)
+            @Html.DisplayFor(model => model.borrowdb.EntryName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.EntryDate)
+            @Html.DisplayNameFor(model => model.borrowdb.EntryDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.EntryDate)
+            @Html.DisplayFor(model => model.borrowdb.EntryDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RequestName)
+            @Html.DisplayNameFor(model => model.borrowdb.RequestName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RequestName)
+            @Html.DisplayFor(model => model.borrowdb.RequestName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RequestDate)
+            @Html.DisplayNameFor(model => model.borrowdb.RequestDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RequestDate)
+            @Html.DisplayFor(model => model.borrowdb.RequestDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.BorrowStatus)
+            @Html.DisplayNameFor(model => model.borrowdb.BorrowStatus)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BorrowStatus)
+            @Html.DisplayFor(model => model.borrowdb.BorrowStatus)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.HeadApproverId)
+            @Html.DisplayNameFor(model => model.borrowdb.HeadApproverId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.HeadApproverId)
+            @Html.DisplayFor(model => model.borrowdb.HeadApproverId)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.HeadApproverDate)
+            @Html.DisplayNameFor(model => model.borrowdb.HeadApproverDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.HeadApproverDate)
+            @Html.DisplayFor(model => model.borrowdb.HeadApproverDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ManagerApproverId)
+            @Html.DisplayNameFor(model => model.borrowdb.ManagerApproverId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ManagerApproverId)
+            @Html.DisplayFor(model => model.borrowdb.ManagerApproverId)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ManagerApproverDate)
+            @Html.DisplayNameFor(model => model.borrowdb.ManagerApproverDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ManagerApproverDate)
+            @Html.DisplayFor(model => model.borrowdb.ManagerApproverDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.LogisticApproverId)
+            @Html.DisplayNameFor(model => model.borrowdb.LogisticApproverId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.LogisticApproverId)
+            @Html.DisplayFor(model => model.borrowdb.LogisticApproverId)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.LogisticApproverDate)
+            @Html.DisplayNameFor(model => model.borrowdb.LogisticApproverDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.LogisticApproverDate)
+            @Html.DisplayFor(model => model.borrowdb.LogisticApproverDate)
         </dd>
+        <br />
 
         @(Html
-            .Grid(Model.BorrowItem)
+            .Grid(Model.borrowdb.BorrowItem)
             .Build(columns =>
             {
                 columns.Add(model => model.ItemCode).Titled("Item Code");
                 columns.Add(model => model.ItemName).Titled("Item Name");
                 columns.Add(model => model.ItemQty).Titled("Qty");
-
                 columns.Add(model => model.ItemStatus).Titled("Status");
             })
             .Empty("ไม่มี Item")
@@ -121,6 +121,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.BorrowId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.borrowdb.BorrowId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

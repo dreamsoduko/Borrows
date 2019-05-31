@@ -1,4 +1,4 @@
-﻿@model Borrows.Models.BorrowDb
+﻿@model Borrows.Controllers.BorrowDbsController
 @using NonFactors.Mvc.Grid;
 
 
@@ -16,85 +16,85 @@
     <div class="col-md-10">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="BorrowId" name="Id" />
+            <input type="hidden" asp-for="@Model.borrowdb.BorrowId" name="Id" />
             <div class="form-group">
-                <label asp-for="ServiceCode" class="control-label"></label>
-                <input asp-for="ServiceCode" class="form-control" />
-                <span asp-validation-for="ServiceCode" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.ServiceCode" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.ServiceCode" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.ServiceCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CustomerName" class="control-label"></label>
-                <input asp-for="CustomerName" class="form-control" />
-                <span asp-validation-for="CustomerName" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.CustomerName" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.CustomerName" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.CustomerName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductId" class="control-label"></label>
-                <input asp-for="ProductId" class="form-control" />
-                <span asp-validation-for="ProductId" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.ProductId" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.ProductId" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.ProductId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SerialNo" class="control-label"></label>
-                <input asp-for="SerialNo" class="form-control" />
-                <span asp-validation-for="SerialNo" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.SerialNo" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.SerialNo" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.SerialNo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EntryName" class="control-label"></label>
-                <input asp-for="EntryName" class="form-control" />
-                <span asp-validation-for="EntryName" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.EntryName" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.EntryName" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.EntryName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EntryDate" class="control-label"></label>
-                <input asp-for="EntryDate" class="form-control" />
-                <span asp-validation-for="EntryDate" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.EntryDate" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.EntryDate" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.EntryDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RequestName" class="control-label"></label>
-                <input asp-for="RequestName" class="form-control" />
-                <span asp-validation-for="RequestName" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.RequestName" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.RequestName" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.RequestName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RequestDate" class="control-label"></label>
-                <input asp-for="RequestDate" class="form-control" />
-                <span asp-validation-for="RequestDate" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.RequestDate" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.RequestDate" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.RequestDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BorrowStatus" class="control-label"></label>
-                <input asp-for="BorrowStatus" class="form-control" />
-                <span asp-validation-for="BorrowStatus" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.BorrowStatus" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.BorrowStatus" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.BorrowStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HeadApproverId" class="control-label"></label>
-                <input asp-for="HeadApproverId" class="form-control" />
-                <span asp-validation-for="HeadApproverId" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.HeadApproverId" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.HeadApproverId" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.HeadApproverId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HeadApproverDate" class="control-label"></label>
-                <input asp-for="HeadApproverDate" class="form-control" />
-                <span asp-validation-for="HeadApproverDate" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.HeadApproverDate" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.HeadApproverDate" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.HeadApproverDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ManagerApproverId" class="control-label"></label>
-                <input asp-for="ManagerApproverId" class="form-control" />
-                <span asp-validation-for="ManagerApproverId" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.ManagerApproverId" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.ManagerApproverId" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.ManagerApproverId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ManagerApproverDate" class="control-label"></label>
-                <input asp-for="ManagerApproverDate" class="form-control" />
-                <span asp-validation-for="ManagerApproverDate" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.ManagerApproverDate" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.ManagerApproverDate" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.ManagerApproverDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LogisticApproverId" class="control-label"></label>
-                <input asp-for="LogisticApproverId" class="form-control" />
-                <span asp-validation-for="LogisticApproverId" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.LogisticApproverId" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.LogisticApproverId" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.LogisticApproverId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LogisticApproverDate" class="control-label"></label>
-                <input asp-for="LogisticApproverDate" class="form-control" />
-                <span asp-validation-for="LogisticApproverDate" class="text-danger"></span>
+                <label asp-for="@Model.borrowdb.LogisticApproverDate" class="control-label"></label>
+                <input asp-for="@Model.borrowdb.LogisticApproverDate" class="form-control" />
+                <span asp-validation-for="@Model.borrowdb.LogisticApproverDate" class="text-danger"></span>
             </div>
 
             <div id="editorRows">
-                @foreach (var item in Model.BorrowItem)
+                @foreach (var item in @Model.borrowdb.BorrowItem)
                 {
                     Html.RenderPartial("_itemEditor", item);
                 }
