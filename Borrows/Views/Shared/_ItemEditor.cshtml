@@ -1,5 +1,5 @@
 ﻿@using HtmlHelpers.BeginCollectionItemCore;
-@model Borrows.Models.BorrowItem
+@model Borrows.Controllers.BorrowDbsController
 
 @{
     Layout = null;
@@ -12,21 +12,21 @@
         
         <div class="form-control">
             <i class="fa fa-square" style="cursor: move" alt=""></i>
-            @Html.HiddenFor(model => model.ItemId)
+            @Html.HiddenFor(model => model.borrowitem.ItemCode)
 
-            @Html.LabelFor(model => model.ItemCode)
-            @Html.EditorFor(model => model.ItemCode)
-            @Html.ValidationMessageFor(model => model.ItemCode)
+            @Html.LabelFor(model => model.borrowitem.ItemCode)
+            @Html.EditorFor(model => model.borrowitem.ItemCode)
+            @Html.ValidationMessageFor(model => model.borrowitem.ItemCode)
 
             <a href="#" onclick="$(this).parent().search();"><i class="fa fa-search"></i></a>
 
-            @Html.LabelFor(model => model.ItemName)
-            @Html.EditorFor(model => model.ItemName)
-            @Html.ValidationMessageFor(model => model.ItemName)
+            @Html.LabelFor(model => model.borrowitem.ItemName)
+            @Html.EditorFor(model => model.borrowitem.ItemName)
+            @Html.ValidationMessageFor(model => model.borrowitem.ItemName)
 
-            @Html.LabelFor(model => model.ItemQty)
-            @Html.EditorFor(model => model.ItemQty)
-            @Html.ValidationMessageFor(model => model.ItemQty)
+            @Html.LabelFor(model => model.borrowitem.ItemQty)
+            @Html.EditorFor(model => model.borrowitem.ItemQty)
+            @Html.ValidationMessageFor(model => model.borrowitem.ItemQty)
 
             <a href="#" onclick="$(this).parent().remove();"><i class="fa fa-trash"></i></a>
         </div>

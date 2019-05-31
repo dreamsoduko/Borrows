@@ -18,14 +18,23 @@ namespace Borrows.Controllers
         public KDTH_BorrowContext _context = new KDTH_BorrowContext();
         public Astea_TH_1401Context astea_context = new Astea_TH_1401Context();
         public kyocera_dbContext kyocera_context = new kyocera_dbContext();
-    
+        public KDTH_1401Context sbo_context = new KDTH_1401Context();
+
         public BorrowDb borrowdb = new BorrowDb();
         public BorrowItem borrowitem = new BorrowItem();
 
 
         public BorrowDbsController()
         {
-            //var students = astea_context.serviceDetail.FromSql("dbo.sp_GetServiceDetails 'SV1905033242'").ToList();
+            //var students = sbo_context.itemDetail.FromSql("Select OITM.ItemCode as 'ItemCode'," +
+            //" OITM.ItemName as 'ItemName'," +
+            //" OITM.FrgnName as 'FrgnName'," +
+            //" OITW.OnHand-OITW.IsCommited As  'StockAvailable'" +
+            //" from OITM " +
+            //" Inner join OITW  On OITM.ItemCode = OITW.ItemCode" +
+            //" where OITW.WhsCode = '6101' and OITM.ItemCode like '1102MW3SG0'").ToList();
+
+            Console.WriteLine();
            
         }
 
@@ -143,7 +152,7 @@ namespace Borrows.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string SV,string CustName,string ProdId,string SerialNo,string Entryname, [Bind("ServiceCode,CustomerName,ProductId,SerialNo,EntryName,EntryDate,RequestName,RequestDate,BorrowStatus,HeadApproverId,HeadApproverDate,ManagerApproverId,ManagerApproverDate,LogisticApproverId,LogisticApproverDate,BorrowItem")] BorrowDb borrowDb)
+        public async Task<IActionResult> Create(string SV,string CustName,string ProdId,string SerialNo,string Entryname, [Bind("ServiceCode,CustomerName,ProductId,SerialNo,EntryName,EntryDate,RequestName,RequestDate,BorrowStatus,HeadApproverId,HeadApproverDate,ManagerApproverId,ManagerApproverDate,LogisticApproverId,LogisticApproverDate")] BorrowDb borrowDb) 
         {
            
 
@@ -179,6 +188,7 @@ namespace Borrows.Controllers
                 borrowDb.LogisticApproverId = "";
                 borrowDb.ManagerApproverDate = DateTime.Now;
                 borrowDb.ManagerApproverId = "";
+
 
                 if (ModelState.IsValid)
                 {
