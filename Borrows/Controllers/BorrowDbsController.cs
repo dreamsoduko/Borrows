@@ -17,13 +17,13 @@ namespace Borrows.Controllers
     {
         private readonly KDTH_BorrowContext _context = new KDTH_BorrowContext();
         private Astea_TH_1401Context astea_context = new Astea_TH_1401Context();
-        private kyocera_dbContext kyocera_context = new kyocera_dbContext();
+        public kyocera_dbContext kyocera_context = new kyocera_dbContext();
     
         public BorrowDb borrowdb = new BorrowDb();
 
+
         public BorrowDbsController()
         {
-            
             //var students = astea_context.serviceDetail.FromSql("dbo.sp_GetServiceDetails 'SV1905033242'").ToList();
            
         }

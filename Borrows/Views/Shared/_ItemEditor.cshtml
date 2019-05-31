@@ -9,13 +9,15 @@
     @using (Html.BeginCollectionItem("BorrowItem"))
     {
         @*<img src="@Url.Content("~/Content/images/draggable-icon.png")" style="cursor: move" alt="" />*@
-        <i class="fa-square" style="cursor: move" alt=""></i>
+        <i class="fa fa-square" style="cursor: move" alt=""></i>
         <div class="form-control">
             @Html.HiddenFor(model => model.ItemId)
 
             @Html.LabelFor(model => model.ItemCode)
             @Html.EditorFor(model => model.ItemCode)
             @Html.ValidationMessageFor(model => model.ItemCode)
+
+            <a href="#" onclick="$(this).parent().search();"><i class="fa fa-search"></i></a>
 
             @Html.LabelFor(model => model.ItemName)
             @Html.EditorFor(model => model.ItemName)
@@ -28,7 +30,7 @@
             @Html.LabelFor(model => model.ItemStatus)
             @Html.EditorFor(model => model.ItemStatus)
             @Html.ValidationMessageFor(model => model.ItemStatus)
-            <a href="#" onclick="$(this).parent().remove();"><i class="fa-trash"></i></a>
+            <a href="#" onclick="$(this).parent().remove();"><i class="fa fa-trash"></i></a>
         </div>
 
 

@@ -1,4 +1,5 @@
 ﻿@*@model IEnumerable<MenuL1>*@
+@model Borrows.Controllers.BorrowDbsController
 
 
 <!DOCTYPE html>
@@ -114,10 +115,10 @@
                 </div>
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
-            @*<ul class="sidebar-menu">
+            <ul class="sidebar-menu">
                     @if (Model != null)
                     {
-                        @foreach (var item in Model.menul1.Where(a => String.IsNullOrEmpty(a.Inactive)).OrderBy(a => a.L1ID))
+                        @foreach (var item in Model.kyocera_context.MenuL1.Where(a => String.IsNullOrEmpty(a.Inactive)).OrderBy(a => a.L1ID))
                         {
                     <li class="treeview">
                         <a href="#">
@@ -126,10 +127,10 @@
                             {<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>}
                         </a>
 
-                        @if (Model.menul2.Where(a => a.L1ID == item.L1ID).ToList().Count > 0)
+                        @if (Model.kyocera_context.MenuL2.Where(a => a.L1ID == item.L1ID).ToList().Count > 0)
                         {
                             <ul class="treeview-menu">
-                                @foreach (var iteml2 in Model.menul2.Where(a => a.L1ID == item.L1ID))
+                                @foreach (var iteml2 in Model.kyocera_context.MenuL2.Where(a => a.L1ID == item.L1ID))
                                 {
                                     <li class="treeview">
                                         <a href="@iteml2.L2Link">
@@ -138,7 +139,7 @@
                                             {<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>}
                                         </a>
                                         <ul class="treeview-menu">
-                                            @foreach (var iteml3 in Model.menul3.Where(a => a.L2ID == iteml2.L2ID))
+                                            @foreach (var iteml3 in Model.kyocera_context.MenuL3.Where(a => a.L2ID == iteml2.L2ID))
                                             {
                                                 <li class="treeview">
                                                     <a href="@iteml3.L3Link">
@@ -167,7 +168,7 @@
 
                     }
 
-                </ul>*@
+                </ul>
         </section>
         <!-- /.sidebar -->
     </aside>
